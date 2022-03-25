@@ -4,7 +4,12 @@ const Demo = () => {
   return (
     <div>
       <p>demo</p>
-      <NavLink to="/generator">Generator</NavLink>
+      <p>
+        <NavLink to="/generator">Generator</NavLink>
+      </p>
+      <p>
+        <NavLink to="/tile-editor">TileEditor</NavLink>
+      </p>
     </div>
   )
 }
