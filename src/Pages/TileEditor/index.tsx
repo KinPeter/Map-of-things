@@ -1,5 +1,5 @@
 import { CSSProperties, useState } from 'react'
-import { TILE_SIZE_MULTIPLIER, TILE_SIZE, TILE } from '../../Data/generatorVariables'
+import { TILE_SIZE_MULTIPLIER, TILE_SIZE, TILE } from '../../Utils/generator.variables'
 import { CircleComputedStyles } from '../../Types/generator.types'
 import styled from 'styled-components'
 
