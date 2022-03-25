@@ -9,7 +9,7 @@ export const COLUMNS = 16
 export const IMG_SIZE_MULTIPLIER = 0.75
 
 // Determines the size multiplier of basically everything
-export const TILE_SIZE_MULTIPLIER = 2
+export const TILE_SIZE_MULTIPLIER = 2.5
 
 // Calculated values of the whole image
 export const TILE_SIZE = 500 * TILE_SIZE_MULTIPLIER // DO NOT CHANGE WITHOUT CHANGING THE CIRCLE SIZES!

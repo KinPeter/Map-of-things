@@ -18,34 +18,49 @@ const Wrapper = styled.div`
 `
 
 interface Props {
-  svgVisible: boolean
-  setSvgVisible: Dispatch<SetStateAction<boolean>>
+  svgOverlayVisible: boolean
+  setSvgOverlayVisible: Dispatch<SetStateAction<boolean>>
+  setMapSvgMode: Dispatch<SetStateAction<boolean>>
+  mapSvgMode: boolean
   toggleStroke: () => void
   exportDisabled: boolean
   exportLabel: string
   exportJpeg: () => void
-  exportSVG: () => void
+  exportOverlaySVG: () => void
+  exportMapSVG: () => void
 }
 
 const GeneratorControls = ({
-  svgVisible,
-  setSvgVisible,
+  svgOverlayVisible,
+  setSvgOverlayVisible,
+  mapSvgMode,
+  setMapSvgMode,
   toggleStroke,
-  exportSVG,
+  exportOverlaySVG,
+  exportMapSVG,
   exportDisabled,
   exportJpeg,
   exportLabel,
 }: Props) => {
   return (
     <Wrapper>
-      <button onClick={() => setSvgVisible(!svgVisible)}>Toggle SVG layer</button>
-      <button onClick={toggleStroke} disabled={!svgVisible}>
+      <button onClick={() => setSvgOverlayVisible(!svgOverlayVisible)}>Toggle SVG layer</button>
+      <button onClick={toggleStroke} disabled={!svgOverlayVisible}>
         Toggle circle strokes
       </button>
-      <button onClick={exportJpeg} disabled={exportDisabled}>
-        {exportLabel}
+      <button onClick={() => setMapSvgMode(!mapSvgMode)}>
+        {mapSvgMode ? 'Map JPEG mode' : 'Map SVG mode'}
       </button>
-      <button onClick={exportSVG}>Export SVG layer</button>
+      {mapSvgMode ? (
+        <button onClick={exportMapSVG} disabled={exportDisabled}>
+          Export map as SVG
+        </button>
+      ) : (
+        <button onClick={exportJpeg} disabled={exportDisabled}>
+          {exportLabel}
+        </button>
+      )}
+      <button onClick={exportOverlaySVG}>Export SVG layer</button>
     </Wrapper>
   )
 }

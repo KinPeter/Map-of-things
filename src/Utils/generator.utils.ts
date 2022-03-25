@@ -81,6 +81,14 @@ export function exportSVGOverlay(element: SVGElement): void {
   link.click()
 }
 
+export function exportSVGImageMap(element: SVGElement): void {
+  const svg = element.outerHTML.replace(/class="[^"]+"/, '')
+  const link = document.createElement('a')
+  link.download = 'map-images.svg'
+  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg)
+  link.click()
+}
+
 export async function convertToJPGDataUrl(element: HTMLElement): Promise<string> {
   return await toJpeg(element, {
     cacheBust: true,
