@@ -1,3 +1,5 @@
+import { Category } from '../Data/categories'
+
 export interface Circle {
   cx: number
   cy: number
@@ -19,5 +21,7 @@ export interface CircleComputedStyles {
 export interface FileData {
   id: number
   filename: string
+  name: string
+  category: Category | number
   multiplier?: number
 }

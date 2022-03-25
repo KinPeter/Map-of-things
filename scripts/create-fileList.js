@@ -18,10 +18,11 @@ export const fileList: FileData[] = [
 
 let id = 1
 const categories = readdirSync(resolve(pngPath))
-categories.forEach(category => {
+categories.forEach((category, categoryIndex) => {
   const icons = readdirSync(resolve(pngPath, category))
   icons.forEach(icon => {
-    content += `  { id: ${id++}, filename: 'png/${category}/${icon}' },\n`
+    const name = icon.split('.png')[0]
+    content += `  { id: ${id++}, filename: 'png/${category}/${icon}', name: '${name}', category: ${categoryIndex} },\n`
   })
 })
 
