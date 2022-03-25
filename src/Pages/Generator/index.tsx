@@ -4,17 +4,18 @@ import { shuffle } from '../../Utils/generator.utils'
 import { toJpeg } from 'html-to-image'
 import { Circle, CircleComputedStyles, FileData, ImagePosition } from '../../Types/generator.types'
 import './styles.css'
+import { multipliers } from '../../Data/multipliers'
 
 // Layout of the tiles
 // To calculate required rows and columns, the number of circles (ROWS*COLUMNS*tile.length) must be higher than the total elements
-const ROWS = 6
-const COLUMNS = 10
+const ROWS = 8
+const COLUMNS = 16
 
 // Determines the size multiplier of an image compared to the circle it's inside
-const IMG_SIZE_MULTIPLIER = 0.875
+const IMG_SIZE_MULTIPLIER = 0.75
 
 // Determines the size multiplier of basically everything
-const TILE_SIZE_MULTIPLIER = 3
+const TILE_SIZE_MULTIPLIER = 2
 
 // Calculated values of the whole image
 const TILE_SIZE = 500 * TILE_SIZE_MULTIPLIER // DO NOT CHANGE WITHOUT CHANGING THE CIRCLE SIZES!
@@ -64,8 +65,15 @@ const imagePositions: ImagePosition[] = new Array(ROWS)
   })
   .flat(2)
 
-// Fill up the empty circles with random elements to achieve full coverage
+// Apply unique size multipliers
 const files: FileData[] = [...baseFileList]
+Object.entries(multipliers).forEach(([id, value]) => {
+  const file = files.find(file => file.id === Number(id))
+  if (!file) throw new Error('File not found when attempted to add multiplier')
+  file.multiplier = value
+})
+
+// Fill up the empty circles with random elements to achieve full coverage
 const totalNumberOfCircles: number = ROWS * COLUMNS * tile.length
 const numOfEmptyCircles: number = totalNumberOfCircles - baseFileList.length
 for (let i = 0; i < numOfEmptyCircles; i++) {
@@ -73,11 +81,11 @@ for (let i = 0; i < numOfEmptyCircles; i++) {
   files.push(baseFileList[randomIndex])
 }
 
-// Shuffle the whole array to avoid too many similar motifs to be too close to each other
+// Shuffle the whole array to avoid too many similar categories to be too close to each other
 shuffle(files)
 
 const Generator = () => {
-  // index to help add motif IDs to the circles
+  // index to help add icon IDs to the circles
   let imageIdx: number = 0
 
   // switch this to 'edit tile mode'
@@ -103,7 +111,7 @@ const Generator = () => {
     )
   }
 
-  // Export the motif map (images) to a JPEG
+  // Export the map (images) to a JPEG
   const ref = useRef(null)
   const [exportDisabled, setExportDisabled] = useState<boolean>(false)
   const [exportLabel, setExportLabel] = useState<string>('Export map to jpeg')
@@ -145,14 +153,14 @@ const Generator = () => {
       >
         {files.map(({ filename, id, multiplier }, index) => {
           const { x, y, r } = imagePositions[index]
-          const sizeMultiplier = multiplier ?? IMG_SIZE_MULTIPLIER
-          const size = r * 2 * sizeMultiplier
+          const uniqueMultiplier = multiplier ?? 1
+          const size = r * 2 * IMG_SIZE_MULTIPLIER * uniqueMultiplier
           return (
             <img
               key={`${filename}${index}`}
-              src={`motivum/${filename}`}
+              src={`${filename}`}
               id={id.toString()}
-              alt="motif"
+              alt="icon"
               style={{
                 position: 'absolute',
                 top: y - size / 2,
@@ -179,7 +187,7 @@ const Generator = () => {
                 cy={cy + rowIndex * TILE_SIZE}
                 r={r}
                 className="map-circle"
-                data-motif-id={files[imageIdx++]?.id}
+                data-item-id={files[imageIdx++]?.id}
               />
             ))
           })
