@@ -70,23 +70,24 @@ export function processFileList(
   return files
 }
 
+export function downloadFile(data: string, filename: string): void {
+  const link = document.createElement('a')
+  link.download = filename
+  link.href = data
+  link.click()
+}
+
 export function exportSVGOverlay(element: SVGElement): void {
   const svg = element.outerHTML
     .replace(/style="[^"]+"/, '')
     .replace(/stroke="[^"]+"/, '')
     .replace(/class="[^"]+"/, '')
-  const link = document.createElement('a')
-  link.download = 'map-circles.svg'
-  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg)
-  link.click()
+  downloadFile('data:text/plain;charset=utf-8,' + encodeURIComponent(svg), 'map-circles.svg')
 }
 
 export function exportSVGImageMap(element: SVGElement): void {
   const svg = element.outerHTML.replace(/class="[^"]+"/, '')
-  const link = document.createElement('a')
-  link.download = 'map-images.svg'
-  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg)
-  link.click()
+  downloadFile('data:text/plain;charset=utf-8,' + encodeURIComponent(svg), 'map-images.svg')
 }
 
 export async function convertToJPGDataUrl(element: HTMLElement): Promise<string> {
@@ -96,11 +97,4 @@ export async function convertToJPGDataUrl(element: HTMLElement): Promise<string>
     skipAutoScale: true,
     skipFonts: true,
   })
-}
-
-export function downloadJPG(dataUrl: string): void {
-  const link = document.createElement('a')
-  link.download = 'icon-map.jpg'
-  link.href = dataUrl
-  link.click()
 }

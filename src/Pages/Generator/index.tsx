@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { fileList as baseFileList } from '../../Data/fileList'
 import {
   convertToJPGDataUrl,
-  downloadJPG,
+  downloadFile,
   exportSVGImageMap,
   exportSVGOverlay,
   getImagePositions,
@@ -68,7 +68,7 @@ const Generator = () => {
     setExportDisabled(true)
     setExportLabel('Exporting...')
     const dataUrl = await convertToJPGDataUrl(imageContainerRef.current as HTMLElement)
-    downloadJPG(dataUrl)
+    downloadFile(dataUrl, 'map-images.jpg')
     setExportDisabled(false)
     setExportLabel('Export map to JPEG')
   }
