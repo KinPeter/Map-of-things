@@ -1,22 +1,22 @@
 import { FileData } from '../Types/generator.types'
-import { MAP_CIRCLE_CLASSNAME } from '../Data/imageMap'
+import { FILTER_OUT_CLASSNAME, MAP_CIRCLE_CLASS_SELECTOR } from '../Data/imageMap'
 
 export function setFilterClassOnShapes(filteredItems: FileData[]): void {
   const filteredIds = filteredItems.map(m => m.id)
-  document.querySelectorAll(MAP_CIRCLE_CLASSNAME).forEach(shape => {
+  document.querySelectorAll(MAP_CIRCLE_CLASS_SELECTOR).forEach(shape => {
     const id = Number((shape as HTMLElement).dataset.itemId)
     if (filteredIds.includes(id)) {
-      shape.classList.remove('filter-out')
+      shape.classList.remove(FILTER_OUT_CLASSNAME)
     } else {
       setTimeout(() => {
-        shape.classList.add('filter-out')
+        shape.classList.add(FILTER_OUT_CLASSNAME)
       })
     }
   })
 }
 
 export function removeFilterClassFromShapes(): void {
-  document.querySelectorAll(MAP_CIRCLE_CLASSNAME).forEach(shape => {
-    shape.classList.remove('filter-out')
+  document.querySelectorAll(MAP_CIRCLE_CLASS_SELECTOR).forEach(shape => {
+    shape.classList.remove(FILTER_OUT_CLASSNAME)
   })
 }

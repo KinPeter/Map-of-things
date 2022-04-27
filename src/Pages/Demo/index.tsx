@@ -1,13 +1,7 @@
 import ImageMap from '../../Components/ImageMap'
-import styled from 'styled-components'
 import { useContextMap } from '../../Context/mapContext'
 import FloatingXButton from '../../Components/FloatingXButton'
-
-const Filter = styled.button`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-`
+import Menu from '../../Components/Menu'
 
 const Demo = () => {
   const { filter, applyFilter, areDetailsOpen } = useContextMap()
@@ -15,7 +9,7 @@ const Demo = () => {
   return (
     <>
       <ImageMap />
-      <Filter onClick={() => applyFilter(0)}>Filter</Filter>
+      <Menu />
       {filter !== undefined && !areDetailsOpen ? (
         <FloatingXButton onClick={() => applyFilter(undefined)} />
       ) : null}

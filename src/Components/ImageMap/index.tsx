@@ -3,7 +3,11 @@ import styled from 'styled-components'
 import OpenSeadragon, { OSDEvent } from 'openseadragon'
 import SVG from 'react-inlinesvg'
 import Circles from './map-circles.svg'
-import { MAP_CIRCLE_CLASSNAME, openSeaDragonDefaults as defaults } from '../../Data/imageMap'
+import {
+  FILTER_OUT_CLASS_SELECTOR,
+  MAP_CIRCLE_CLASS_SELECTOR,
+  openSeaDragonDefaults as defaults,
+} from '../../Data/imageMap'
 import { useContextMap } from '../../Context/mapContext'
 
 const MapContainer = styled.div`
@@ -20,7 +24,7 @@ const MapContainer = styled.div`
       width: 100%;
       height: 100%;
 
-      ${MAP_CIRCLE_CLASSNAME} {
+      ${MAP_CIRCLE_CLASS_SELECTOR} {
         fill: transparent;
         transition: 1.5s linear;
         cursor: pointer;
@@ -56,10 +60,10 @@ const ImageMap = () => {
       // The 'quick' property takes the distance and time thresholds into consideration which are set on the
       // MouseTracker object to distinguish clicks/taps from drag/pinch/pan gestures.
       // We don't want anything to happen if it's a long event, or if the target item is filtered out
-      if (!quickEvent || target.matches('.filter-out')) return
+      if (!quickEvent || target.matches(FILTER_OUT_CLASS_SELECTOR)) return
 
       // Here comes the logic we want to do when an image is clicked
-      if (target.matches(MAP_CIRCLE_CLASSNAME) && target.dataset.itemId) {
+      if (target.matches(MAP_CIRCLE_CLASS_SELECTOR) && target.dataset.itemId) {
         setTargetedItemId(target.dataset.itemId)
       }
     },

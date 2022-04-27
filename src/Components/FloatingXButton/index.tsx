@@ -11,6 +11,7 @@ const Button = styled.button`
   border-radius: 100%;
   border: none;
   padding: 0;
+  cursor: pointer;
 
   .black-x-svg {
     width: 50%;
