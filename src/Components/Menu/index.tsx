@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { Category } from '../../Data/categories'
 import { useContextMap } from '../../Context/mapContext'
+import SVG from 'react-inlinesvg'
+import { useNavigate } from 'react-router-dom'
 
 const MenuWrapper = styled.div`
   font-size: 16px;
@@ -27,22 +29,26 @@ const MenuWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 13em;
-    height: 4em;
-    width: 4em;
+    height: 5em;
+    width: 5em;
     border: none;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--color-black-90);
     border-top-right-radius: 1.5em;
     border-bottom-right-radius: 1.5em;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
   }
 
   .menu {
     width: 13em;
     max-height: 90vh;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--color-black-90);
     border-bottom-right-radius: 1.5em;
-    color: #fff;
+    color: white;
     padding: 1em;
 
     h1 {
@@ -66,19 +72,10 @@ const MenuWrapper = styled.div`
       background: none;
       border: none;
       color: inherit;
-      padding: 0.3em 0.75em;
+      padding: 0.3em 0.5em;
 
       &.active {
-        :before {
-          // TODO change to normal element
-          content: '';
-          width: 0.4em;
-          height: 0.4em;
-          background-color: #fff;
-          border-radius: 50%;
-          position: absolute;
-          transform: translate(-0.7em, 0.3em);
-        }
+        color: var(--color-red);
       }
     }
   }
@@ -86,11 +83,20 @@ const MenuWrapper = styled.div`
 
 const Menu = () => {
   const { applyFilter, filter } = useContextMap()
+  const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
+
+  const onClickFilter = (filterIndex: number) => {
+    applyFilter(filterIndex)
+    setTimeout(() => {
+      setOpen(false)
+    }, 300)
+  }
+
   return (
     <MenuWrapper className={open ? 'open' : ''}>
       <button className="toggle-button" onClick={() => setOpen(!open)}>
-        .
+        <SVG src={open ? '/mat-icons/chevron_left.svg' : '/mat-icons/menu.svg'} />
       </button>
       <div className="menu">
         <h1>Filters</h1>
@@ -98,10 +104,10 @@ const Menu = () => {
           {Object.keys(Category)
             .filter(v => isNaN(Number(v)))
             .map((name, index) => (
-              <li>
+              <li key={name}>
                 <button
                   className={filter === index ? 'active' : ''}
-                  onClick={() => applyFilter(index)}
+                  onClick={() => onClickFilter(index)}
                 >
                   {name}
                 </button>
@@ -111,8 +117,8 @@ const Menu = () => {
         <h1>Go to</h1>
         <ul>
           <li>
-            <button>MAP GENERATOR</button>
-            <button>TILE EDITOR</button>
+            <button onClick={() => navigate('/generator')}>MAP GENERATOR</button>
+            <button onClick={() => navigate('/tile-editor')}>TILE EDITOR</button>
           </li>
         </ul>
       </div>

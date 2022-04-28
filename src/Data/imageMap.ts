@@ -1,6 +1,6 @@
 export const openSeaDragonDefaults = {
-  initialZoom: 2,
-  minZoom: 0.65,
+  initialZoom: 4,
+  minZoom: 0.3,
   maxZoom: 12,
 }
 

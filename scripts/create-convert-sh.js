@@ -1,5 +1,5 @@
 /**
- * Script to generate the shell script to convert the original SVG icons into PNG format with resizing them.
+ * Script to generate the shell script to convert the original SVG mat-icons into PNG format with resizing them.
  * For the conversion use the librsvg2 and librsvg2-tools libs in Linux.
  */
 const { readdirSync, mkdirSync, rmSync, existsSync, writeFileSync } = require('fs')

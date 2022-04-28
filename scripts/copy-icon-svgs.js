@@ -1,5 +1,5 @@
 /**
- * Script to copy the original SVG icons from the Material Icons repository to a simpler folder structure
+ * Script to copy the original SVG mat-icons from the Material Icons repository to a simpler folder structure
  */
 const { readdirSync, mkdirSync, existsSync, copyFileSync } = require('fs')
 const { resolve } = require('path')

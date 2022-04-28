@@ -3,8 +3,8 @@ import SVG from 'react-inlinesvg'
 
 const Button = styled.button`
   position: fixed;
-  top: 60px;
-  right: 20px;
+  top: 6.8vh;
+  right: 4vh;
   background: none;
   width: 40px;
   height: 40px;
@@ -13,22 +13,13 @@ const Button = styled.button`
   padding: 0;
   cursor: pointer;
 
-  .black-x-svg {
-    width: 50%;
-    height: 50%;
-  }
-
   @media (min-width: 1000px) {
     width: 50px;
     height: 50px;
-    top: 75px;
-    right: 30px;
   }
   @media (min-width: 1600px) {
     width: 60px;
     height: 60px;
-    top: 100px;
-    right: 40px;
   }
 `
 
@@ -39,7 +30,7 @@ interface Props {
 const FloatingXButton = ({ onClick }: Props) => {
   return (
     <Button onClick={onClick}>
-      <SVG className="black-x-svg" src="/icons/x.svg" />
+      <SVG src="/mat-icons/x.svg" />
     </Button>
   )
 }
