@@ -14,8 +14,8 @@ import { FileData } from '../Types/generator.types'
 
 interface ContextType {
   allItems: FileData[]
-  areDetailsOpen: boolean
-  setDetailsOpen: Dispatch<SetStateAction<boolean>>
+  targetedItem: FileData | undefined
+  deselectItem: () => void
   setTargetedItemId: Dispatch<SetStateAction<string>>
   filter: Category | undefined
   applyFilter: (filter: Category | undefined) => void
@@ -28,16 +28,16 @@ interface Props {
 const Context = createContext({} as ContextType)
 
 const MapContext = ({ children }: Props) => {
-  const [areDetailsOpen, setDetailsOpen] = useState<boolean>(false)
   const [targetedItemId, setTargetedItemId] = useState<string>('')
+  const [targetedItem, setTargetedItem] = useState<FileData | undefined>()
   const [filter, setFilter] = useState<Category | undefined>()
-  // const [filteredItems, setFilteredItems] = useState<FileData[]>([])
 
   useEffect(() => {
     if (!targetedItemId || isNaN(Number(targetedItemId))) return
 
     const targeted = allItems.find(item => item.id === Number(targetedItemId))
     console.log(targeted)
+    setTargetedItem(targeted)
     setTargetedItemId('')
   }, [targetedItemId])
 
@@ -56,12 +56,17 @@ const MapContext = ({ children }: Props) => {
     setFilter(filter)
   }
 
+  const deselectItem = () => {
+    setTargetedItem(undefined)
+    setTargetedItemId('')
+  }
+
   return (
     <Context.Provider
       value={{
         allItems,
-        areDetailsOpen,
-        setDetailsOpen,
+        targetedItem,
+        deselectItem,
         setTargetedItemId,
         applyFilter,
         filter,
