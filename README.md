@@ -8,7 +8,7 @@ The idea and most of the implementation came from an official project where I ha
 
 ## Features:
 
-- Demo of a zoomable, pannable, filterable, interactive map of 1500+ images
+- Demo of a zoomable, pannable, filterable, interactive map of 2000+ images
 - Tools and documentation to generate such a map
 
 ## Technologies used:
@@ -42,3 +42,9 @@ $ npm run build
 ```
 
 To learn how to generate your own map using this application, please read [the related documentations](./docs/map-generation.md).
+
+## Deployment
+
+Deployment is automated using GitHub Actions on each push to the `master` branch.
+
+Visit the site on [map-of-things.p-kin.com](https://map-of-things.p-kin.com)!
