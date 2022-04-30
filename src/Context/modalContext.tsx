@@ -2,8 +2,11 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import { useContextMap } from './mapContext'
 
 interface ContextType {
-  isOpen: boolean
-  close: () => void
+  isIconModalOpen: boolean
+  closeIconModal: () => void
+  isInfoModalOpen: boolean
+  openInfoModal: () => void
+  closeInfoModal: () => void
 }
 
 interface Props {
@@ -14,24 +17,36 @@ const Context = createContext({} as ContextType)
 
 const ModalContext = ({ children }: Props) => {
   const { targetedItem, deselectItem } = useContextMap()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isIconModalOpen, setIsIconModalOpen] = useState<boolean>(false)
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    if (targetedItem && !isOpen) {
-      setIsOpen(true)
+    if (targetedItem && !isIconModalOpen) {
+      setIsIconModalOpen(true)
     }
   }, [targetedItem])
 
-  const close = () => {
-    setIsOpen(false)
+  const closeIconModal = () => {
+    setIsIconModalOpen(false)
     deselectItem()
+  }
+
+  const openInfoModal = () => {
+    setIsInfoModalOpen(true)
+  }
+
+  const closeInfoModal = () => {
+    setIsInfoModalOpen(false)
   }
 
   return (
     <Context.Provider
       value={{
-        isOpen,
-        close,
+        isIconModalOpen,
+        closeIconModal,
+        isInfoModalOpen,
+        openInfoModal,
+        closeInfoModal,
       }}
     >
       {children}

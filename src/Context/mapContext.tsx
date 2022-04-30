@@ -36,7 +36,6 @@ const MapContext = ({ children }: Props) => {
     if (!targetedItemId || isNaN(Number(targetedItemId))) return
 
     const targeted = allItems.find(item => item.id === Number(targetedItemId))
-    console.log(targeted)
     setTargetedItem(targeted)
     setTargetedItemId('')
   }, [targetedItemId])
@@ -44,10 +43,8 @@ const MapContext = ({ children }: Props) => {
   useEffect(() => {
     if (filter === undefined) {
       removeFilterClassFromShapes()
-      // setFilteredItems([...allItems])
     } else {
       const filtered = allItems.filter(item => item.category === filter)
-      // setFilteredItems(filtered)
       setFilterClassOnShapes(filtered)
     }
   }, [filter])

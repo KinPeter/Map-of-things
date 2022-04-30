@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { fileList as baseFileList } from '../../Data/fileList'
 import {
@@ -21,6 +21,8 @@ import {
   TTL_WIDTH,
   TTL_HEIGHT,
 } from '../../Utils/generator.variables'
+import { useContextModal } from '../../Context/modalContext'
+import FeatureInfoModal from '../../Components/Modal/FeatureInfoModal'
 
 const ImageContainer = styled.div`
   position: absolute;
@@ -44,6 +46,7 @@ const imagePositions: ImagePosition[] = getImagePositions(ROWS, COLUMNS, TILE, T
 const files: FileData[] = processFileList(baseFileList, ROWS, COLUMNS, TILE, multipliers)
 
 const Generator = () => {
+  const { openInfoModal } = useContextModal()
   const imageContainerRef = useRef(null)
   const svgContainerRef = useRef(null)
   const [stroke, setStroke] = useState<'none' | 'grey'>('grey')
@@ -51,6 +54,12 @@ const Generator = () => {
   const [mapSvgMode, setMapSvgMode] = useState<boolean>(false)
   const [exportDisabled, setExportDisabled] = useState<boolean>(false)
   const [exportLabel, setExportLabel] = useState<string>('Export map to JPEG')
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') {
+      openInfoModal()
+    }
+  }, [])
 
   // Index to help add icon IDs to the circles
   let imageIdx: number = 0
@@ -187,6 +196,7 @@ const Generator = () => {
         exportMapSVG={exportMapSVG}
         exportOverlaySVG={exportOverlaySVG}
       />
+      <FeatureInfoModal />
     </>
   )
 }

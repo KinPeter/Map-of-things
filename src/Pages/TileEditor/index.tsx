@@ -1,7 +1,9 @@
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import { TILE_SIZE_MULTIPLIER, TILE_SIZE, TILE } from '../../Utils/generator.variables'
 import { CircleComputedStyles } from '../../Types/generator.types'
 import styled from 'styled-components'
+import { useContextModal } from '../../Context/modalContext'
+import FeatureInfoModal from '../../Components/Modal/FeatureInfoModal'
 
 const Wrapper = styled.div`
   button {
@@ -30,7 +32,9 @@ const Wrapper = styled.div`
 `
 
 const TileEditor = () => {
+  const { openInfoModal } = useContextModal()
   const [circles, setCircles] = useState<CircleComputedStyles[]>([])
+
   const getCircles = () => {
     setCircles(
       Array.from(document.getElementsByTagName('circle')).map(circle => {
@@ -39,6 +43,12 @@ const TileEditor = () => {
       })
     )
   }
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') {
+      openInfoModal()
+    }
+  }, [])
 
   return (
     <Wrapper>
@@ -65,6 +75,7 @@ const TileEditor = () => {
           })}
         </div>
       ) : null}
+      <FeatureInfoModal />
     </Wrapper>
   )
 }

@@ -6,11 +6,15 @@ import SVG from 'react-inlinesvg'
 import { useNavigate } from 'react-router-dom'
 
 const MenuWrapper = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   position: absolute;
   top: 5vh;
   left: -13em;
   transition: left 0.3s ease;
+
+  @media (min-height: 700px) {
+    font-size: 16px;
+  }
 
   @media (min-height: 1000px) {
     font-size: 18px;
@@ -53,10 +57,10 @@ const MenuWrapper = styled.div`
 
     h1 {
       font-size: 1.2em;
-      margin: 0 0 1em;
+      margin: 0 0 0.5em;
 
       &:not(:first-of-type) {
-        margin: 1em 0 1em;
+        margin: 0.5em 0 0.5em;
       }
     }
 
@@ -72,7 +76,11 @@ const MenuWrapper = styled.div`
       background: none;
       border: none;
       color: inherit;
-      padding: 0.3em 0.5em;
+      padding: 0.15em 0.5em;
+
+      @media (min-height: 750px) {
+        padding: 0.3em 0.5em;
+      }
 
       &.active {
         color: var(--color-red);

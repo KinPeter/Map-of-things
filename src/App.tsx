@@ -4,7 +4,6 @@ import Demo from './Pages/Demo'
 import Generator from './Pages/Generator'
 import TileEditor from './Pages/TileEditor'
 import MapContext from './Context/mapContext'
-import Modal from './Components/Modal'
 import ModalContext from './Context/modalContext'
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
               <Route path="/tile-editor" element={<TileEditor />} />
               <Route path="*" element={<Navigate to="/demo" />} />
             </Routes>
-            <Modal />
           </div>
         </BrowserRouter>
       </ModalContext>
