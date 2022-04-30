@@ -30,7 +30,7 @@ interface Props {
 const FloatingXButton = ({ onClick }: Props) => {
   return (
     <Button onClick={onClick}>
-      <SVG src="/mat-icons/x.svg" />
+      <SVG src="./mat-icons/x.svg" />
     </Button>
   )
 }

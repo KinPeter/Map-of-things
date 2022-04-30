@@ -104,7 +104,7 @@ const Menu = () => {
   return (
     <MenuWrapper className={open ? 'open' : ''}>
       <button className="toggle-button" onClick={() => setOpen(!open)}>
-        <SVG src={open ? '/mat-icons/chevron_left.svg' : '/mat-icons/menu.svg'} />
+        <SVG src={open ? './mat-icons/chevron_left.svg' : './mat-icons/menu.svg'} />
       </button>
       <div className="menu">
         <h1>Filters</h1>
