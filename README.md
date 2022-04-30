@@ -1,46 +1,44 @@
-# Map of Things demo app
+# Map of Things demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Demo application for how to create and use a zoomable, filterable, interactive map of basically any random images. 
 
-## Available Scripts
+The idea and most of the implementation came from an official project where I had to create a similar map from scratch. For this demonstration I chose to use Google's Material Icons since their number is over 2000, and it is also possible to apply filters for them by categories.
 
-In the project directory, you can run:
+![Gif](https://stuff.p-kin.com/screentogif/map-of-things.gif)
 
-### `npm start`
+## Features:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Demo of a zoomable, pannable, filterable, interactive map of 1500+ images
+- Tools and documentation to generate such a map
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies used:
 
-### `npm test`
+- React
+- TypeScript
+- OpenSeaDragon
+- SVG generation and HTML2Image
+- GitHub Actions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Development, map generator usage
 
-### `npm run build`
+To set up and run the project locally you only need `Node js` installed, preferably LTS v16+.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Available NPM commands:
+```shell
+# Install the dependencies
+$ npm ci
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Run the development server
+$ npm run start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Check code formatting
+$ npm run format:check
 
-### `npm run eject`
+# Run the linter
+$ npm run lint
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Build for deployment
+$ npm run build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn how to generate your own map using this application, please read [the related documentations](./docs/map-generation.md).

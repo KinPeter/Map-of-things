@@ -10,7 +10,7 @@ function App() {
   return (
     <MapContext>
       <ModalContext>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter>
           <div className="App">
             <Routes>
               <Route path="/" element={<Navigate to="/demo" />} />

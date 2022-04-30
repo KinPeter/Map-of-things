@@ -1,9 +1,8 @@
 {
   "name": "map-of-things",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Peter Kin",
   "private": true,
-  "homepage": "https://kinpeter.github.io/Map-of-things/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
